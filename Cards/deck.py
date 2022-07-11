@@ -1,8 +1,6 @@
 import random
 
-from .Card import Card
-from .Suite import Suite
-from .Value import Value
+from .card import Card, Suite, Value
 
 
 class Deck:

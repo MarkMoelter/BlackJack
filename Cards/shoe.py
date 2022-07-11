@@ -1,10 +1,10 @@
 import random
 
-from .Card import Card
-from .Deck import Deck
+from .card import Card
+from .deck import Deck
 
 
-class CardShoe:
+class Shoe:
     """Representation of multiple decks of cards."""
     def __init__(self, decks: int = 6):
         # generate shoe from the num of decks
