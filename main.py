@@ -1,11 +1,10 @@
-from PlayerDatabase import PlayerDatabase
+from Game import Game
 
 
 def main() -> None:
-    n_players: int = int(input('Enter the number of players: '))
+    player_n = int(input('Enter the number of players: '))
+    game = Game(player_n)
 
-    players = PlayerDatabase(n_players)
-    print(players)
 
 
 if __name__ == '__main__':
