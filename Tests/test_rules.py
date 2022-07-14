@@ -1,34 +1,44 @@
 import unittest
 
 from Cards import Card, Value, Suite
-from Game import Rules
+from Game import Rules, Player
 
 
 class TestRules(unittest.TestCase):
 
     def setUp(self):
+
         # blackjack Cards
         self.ace_king = Rules(
-            [
-                Card(Suite.HEART, Value.ACE),
-                Card(Suite.HEART, Value.KING)
-            ]
+            Player(
+                'Mark',
+                hand=[
+                    Card(Suite.HEART, Value.ACE),
+                    Card(Suite.HEART, Value.KING)
+                ]
+            )
         )
 
         self.ace_eight_king = Rules(
-            [
-                Card(Suite.HEART, Value.ACE),
-                Card(Suite.HEART, Value.EIGHT),
-                Card(Suite.HEART, Value.KING)
-            ]
+            Player(
+                'Mark',
+                hand=[
+                    Card(Suite.HEART, Value.ACE),
+                    Card(Suite.HEART, Value.EIGHT),
+                    Card(Suite.HEART, Value.KING)
+                ]
+            )
         )
 
         self.king_eight_king = Rules(
-            [
-                Card(Suite.HEART, Value.KING),
-                Card(Suite.HEART, Value.EIGHT),
-                Card(Suite.HEART, Value.KING)
-            ]
+            Player(
+                'Mark',
+                hand=[
+                    Card(Suite.HEART, Value.KING),
+                    Card(Suite.HEART, Value.EIGHT),
+                    Card(Suite.HEART, Value.KING)
+                ]
+            )
         )
 
     def test_is_blackjack(self):
