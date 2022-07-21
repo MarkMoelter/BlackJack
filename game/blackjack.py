@@ -20,10 +20,14 @@ class BlackJack:
 
         self.game_initial_setup()
 
+
+
         for player in self.players:
             if Rules(player).is_blackjack():
                 continue
             self.player_turn(player)
+
+
 
         self.dealer_turn()
 
@@ -121,3 +125,5 @@ class BlackJack:
                 if Rules(player).is_blackjack():
                     player.deposit(int(player.bet_amount * 1.5))
                     print(f"{player.name} got blackjack!")
+
+        print(f"Dealer card showing: {self.dealer.hand[0]}S")
