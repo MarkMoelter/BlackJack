@@ -54,7 +54,7 @@ class Player:
 
     def add_cards(self, cards: list[Card] | Card) -> None:
         """Append card to list if objects are cards"""
-        self.hand.append(funcs.validate_obj_list(cards, Card))
+        self.hand.extend(funcs.validate_obj_list(cards, Card))
 
     def clear_hand(self):
         self.hand.clear()

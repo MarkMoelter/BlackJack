@@ -1,4 +1,4 @@
-from game import Game, Player
+from game import BlackJack, Player
 
 
 def main() -> None:
@@ -7,7 +7,7 @@ def main() -> None:
         Player(input(f"Enter player {num + 1}'s name: "))
         for num in range(player_n)
     ]
-    Game(players).single_game()
+    BlackJack(players).single_game()
 
 
 if __name__ == '__main__':

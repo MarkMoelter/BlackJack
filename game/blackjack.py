@@ -6,8 +6,11 @@ from .rules import Rules
 START_CARD_NUMBER = 2
 
 
-class Game:
-    def __init__(self, players: list[Player], dealer: Dealer = Dealer()):
+class BlackJack:
+    def __init__(
+            self,
+            players: list[Player],
+            dealer: Dealer = Dealer()):
         self.players = players
         self.dealer = dealer
         self.shoe = Shoe()
@@ -24,42 +27,56 @@ class Game:
 
         self.dealer_turn()
 
+        print(f"Dealer's hand: {self.dealer.hand}")
+        print(f"Dealer's value: {Rules(self.dealer).hand_value()}")
+
         for player in self.players:
             self.award_winner(player)
+            print(f"{player.name}'s final balance: {player.balance}")
 
-    def award_winner(self, player):
+    def award_winner(self, player: Player):
+        """Rules for determining the winner of the game.
+         Deposits the bet amount into the balance."""
         win = Rules(player).hand_value() > Rules(self.dealer).hand_value()
         push = Rules(player).hand_value() == Rules(self.dealer).hand_value()
 
-        if win:
+        dealer_bust = Rules(self.dealer).is_bust()
+        player_bust = Rules(player).is_bust()
+
+        if (dealer_bust and not player_bust) or win:
             # return the bet twofold
             player.deposit(player.bet_amount * 2)
+            print(f'{player.name} won! Earned {player.bet_amount}')
         elif push:
-            # return the bet
+            # return the bet to the player' balance.
             player.deposit(player.bet_amount)
+            print(f'{player.name} pushed!')
+        else:
+            print(f'{player.name} lost!')
 
         player.bet_amount = 0
 
-    def player_turn(self, player):
+    def player_turn(self, player: Player):
         """Player's turn"""
         while True:
             # print the player's cards
+            print(f"{player.name}'s turn")
             print(player.hand)
             value = Rules(player).hand_value()
             print(f'Hand value: {value}')
 
             # give the option to stay, hit, double down, or split
             options = {
-                'hit': self.hit(player),
-                'double down': self.double_down(player),
-                'split': self.split(player)
+                'hit': self.hit,
+                'double down': self.double_down,
+                'split': self.split
             }
 
             player_choice = input('"stay", "hit", "double down", "split": ')
             if player_choice == 'stay':
                 return
 
-            selection = options[player_choice]
+            options[player_choice](player)
 
             # check if busted
             if Rules(player).is_bust():
@@ -83,20 +100,24 @@ class Game:
 
     def dealer_turn(self):
         """Dealer rules"""
-        raise NotImplementedError
+        # hit if under 17
+        while Rules(self.dealer).hand_value() < 17:
+            self.dealer.add_cards(self.shoe.deal())
+        return
 
     def game_initial_setup(self):
         """Deal starting cards"""
         for player in self.players:
-            player.bet(int(input('Enter your bet: ')))
+            player.bet(int(input(f'{player.name}, enter your bet: ')))
 
         # give 2 cards to start
         for _ in range(START_CARD_NUMBER):
             # dealer cards
-            self.dealer.hand = self.shoe.deal()
+            self.dealer.hand.append(self.shoe.deal())
 
             # player cards
             for player in self.players:
                 player.hand.append(self.shoe.deal())
                 if Rules(player).is_blackjack():
                     player.deposit(int(player.bet_amount * 1.5))
+                    print(f"{player.name} got blackjack!")

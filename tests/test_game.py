@@ -1,13 +1,13 @@
 import unittest
 
 from cards import Card, Suite, Value
-from game import Game, Player
+from game import BlackJack, Player
 
 
 class TestGameMethods(unittest.TestCase):
     def setUp(self) -> None:
         self.mark_player = Player('Mark')
-        self.single_player = Game([self.mark_player])
+        self.single_player = BlackJack([self.mark_player])
 
     def test_award_winner(self):
         # setup

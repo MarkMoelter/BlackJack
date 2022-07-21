@@ -1,4 +1,4 @@
 from .dealer import Dealer
-from .game import Game
+from .blackjack import BlackJack
 from .player import Player
 from .rules import Rules
