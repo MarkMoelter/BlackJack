@@ -1,5 +1,5 @@
 from .player import Player
-from Cards import Card
+from cards import Card
 
 
 class Dealer(Player):
@@ -8,3 +8,6 @@ class Dealer(Player):
 
         if hand is not None:
             self.hand = hand
+
+    def turn(self):
+        raise NotImplementedError

@@ -1,9 +1,10 @@
-from Cards import Value
+from cards import Value
 from .player import Player
+from .dealer import Dealer
 
 
 class Rules:
-    def __init__(self, player: Player):
+    def __init__(self, player: Player | Dealer):
         self.player = player
 
         # convert cards to their blackjack values
@@ -29,8 +30,9 @@ class Rules:
 
         # If player busts, replace aces with value = 1
         for idx, val in enumerate(self.hand_value_list):
-            bust_with_aces = (val == 11) and (sum(self.hand_value_list) > 21)
-            if bust_with_aces:
+            is_bust = sum(self.hand_value_list) > 21
+            an_ace = 11
+            if is_bust and val == an_ace:
                 self.hand_value_list[idx] = 1
 
         return sum(self.hand_value_list)
@@ -41,8 +43,10 @@ class Rules:
 
     def is_bust(self) -> bool:
         """Determine if the player exceeds a score of 21."""
-        if self.hand_value() > 21:
-            return True
+        return self.hand_value() > 21
+
+    def check_busted(self, player):
+        raise NotImplementedError
 
     # todo can_split
     def can_split(self) -> bool:

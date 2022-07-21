@@ -1,14 +1,14 @@
 import unittest
 
-from Cards import Card, Value, Suite
-from Game import Rules, Player
+from cards import Card, Value, Suite
+from game import Rules, Player
 
 
 class TestRules(unittest.TestCase):
 
     def setUp(self):
 
-        # blackjack Cards
+        # blackjack cards
         self.ace_king = Rules(
             Player(
                 'Mark',

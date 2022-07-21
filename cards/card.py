@@ -31,3 +31,6 @@ class Card:
 
     def __repr__(self):
         return f"Card({self.value}, {self.suite})"
+
+    def __str__(self):
+        return f"{str(self.value)[6:]} of {str(self.suite)[6:]}"

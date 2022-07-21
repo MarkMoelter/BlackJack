@@ -1,0 +1,39 @@
+Cards
+    Card
+    - value: Value
+- suite: suite
+
+    Deck
+    - deck: list[Card]
+    - deal(): Card
+
+    Shoe
+    - shoe: list[Deck]
+    - deal(): Card
+
+Player
+- name: string
+- balance: int = 100
+- hand: list[Card]
+- bet(): int
+- get_balance(): int
+- set_cards()
+
+Rules
+- hand: list[Card]
+- hand_values: list[int]
+- blackjack_value(): int
+- hand_value(): int
+- is_blackjack(): boolean
+- is_bust(): boolean
+- can_split(): boolean
+
+Game
+- players
+- next_player(): Player
+
+Action
+- hit(): Card
+- stay(): None
+- double_down(): Card
+- split(): Card

@@ -1,5 +1,5 @@
 import unittest
-from Cards import Card, Deck, Shoe, Value, Suite
+from cards import Card, Deck, Shoe, Value, Suite
 
 
 class TestCards(unittest.TestCase):
