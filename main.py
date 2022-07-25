@@ -7,7 +7,7 @@ def main() -> None:
         Player(input(f"Enter player {num + 1}'s name: "))
         for num in range(player_n)
     ]
-    BlackJack(players).single_game()
+    BlackJack(players).multi_game(int(input('Number of games to play: ')))
 
 
 if __name__ == '__main__':

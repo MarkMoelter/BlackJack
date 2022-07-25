@@ -15,19 +15,19 @@ class BlackJack:
         self.dealer = dealer
         self.shoe = Shoe()
 
+    def multi_game(self, game_num):
+        for _ in range(game_num):
+            self.single_game()
+
     def single_game(self):
         """Implement a single game of BlackJack."""
 
         self.game_initial_setup()
 
-
-
         for player in self.players:
             if Rules(player).is_blackjack():
                 continue
             self.player_turn(player)
-
-
 
         self.dealer_turn()
 
@@ -37,6 +37,8 @@ class BlackJack:
         for player in self.players:
             self.award_winner(player)
             print(f"{player.name}'s final balance: {player.balance}")
+
+        self.dealer.clear_hand()
 
     def award_winner(self, player: Player):
         """Rules for determining the winner of the game.
@@ -59,6 +61,7 @@ class BlackJack:
             print(f'{player.name} lost!')
 
         player.bet_amount = 0
+        player.clear_hand()
 
     def player_turn(self, player: Player):
         """Player's turn"""
