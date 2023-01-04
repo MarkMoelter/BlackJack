@@ -1,13 +1,17 @@
 import unittest
-from cards import Card, Deck, Shoe, Value, Suite
+
+from cards import Card, Value, Suite
 
 
-class TestCards(unittest.TestCase):
+class TestCard(unittest.TestCase):
     def setUp(self) -> None:
-        card = Card(Suite.CLUB, Value.ACE)
+        self.card = Card(Suite.CLUB, Value.ACE)
 
-    def test_card(self) -> None:
-        self.assertEqual(True, False)  # add assertion here
+    def test_value(self) -> None:
+        self.assertEqual(self.card.value, Value.ACE)
+
+    def test_suite(self) -> None:
+        self.assertEqual(self.card.suite, Suite.CLUB)
 
 
 if __name__ == '__main__':

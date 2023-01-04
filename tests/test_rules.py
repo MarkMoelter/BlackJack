@@ -7,7 +7,6 @@ from game import Rules, Player
 class TestRules(unittest.TestCase):
 
     def setUp(self):
-
         # blackjack cards
         self.ace_king = Rules(
             Player(
